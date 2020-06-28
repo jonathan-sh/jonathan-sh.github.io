@@ -1,0 +1,36 @@
+body{
+    background-color: black;
+}
+
+*:focus {
+    outline: none;
+}
+
+.name{
+    color:orange;
+    font-family: 'Courier New', Courier, monospace;
+    border: none; 
+    font-size: 1.5em;
+    width: auto;
+    float: left;
+}
+
+.input{
+    color: green;
+    background-color: black;
+    font-family: 'Courier New', Courier, monospace;
+    border: none; 
+    font-size: 1.5em;
+    float: left;
+    width: 60%;
+}
+
+.output{
+    display: inline-block; 
+    color: green;
+    background-color: black;
+    font-family: 'Courier New', Courier, monospace;
+    border: none; 
+    font-size: 1.5em;
+    width: 100%;
+}
