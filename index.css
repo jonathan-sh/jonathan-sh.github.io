@@ -1,3 +1,8 @@
+html, body, #fullheight {
+    min-height: 100% !important;
+    height: 100%;
+}
+
 body{
     background-color: black;
 }
@@ -9,7 +14,6 @@ body{
 .name{
     color:orange;
     font-family: 'Courier New', Courier, monospace;
-    border: none; 
     font-size: 1.5em;
     width: auto;
     float: left;
@@ -30,7 +34,6 @@ body{
     color: green;
     background-color: black;
     font-family: 'Courier New', Courier, monospace;
-    border: none; 
     font-size: 1.5em;
     width: 100%;
 }

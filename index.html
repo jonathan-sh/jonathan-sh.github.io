@@ -9,11 +9,11 @@
     <title>Jonathan :)</title>
 </head>
 
-<body>
+<body  onclick="setFocusAtTheLastInput()">
     <terminal id="terminal">
         <input-line style="display: inline-block; width: 100%;">
             <span class="name">headhunter@jarvis:~$&nbsp;</span>
-            <input id="0" class="input" onkeypress="onEnter(event)" autofocus>">
+            <input id="0" class="input" onkeyup="pressKey(event)" autofocus>
         </input-line>        
     </terminal>
 </body>
