@@ -1,24 +1,103 @@
 let inputId = 0;
+let outputId = 0;
 let history = [];
 let historyIndex = 0;
 
 
 const source = {
-    "about": [
-        "<b>ABOUT</b>",
-        "",
-        "",
-        "Jonathan Silva - Software Developer",
-        "Um desenvolvedor que quase sempre usa ponto e virgula :)",
-        "",
-        "Elaborando APIs backend estou acostumado a usar: Spring, Kotlin, Java e Nodejs.",
-        "Dou preferência para Java e Kotlin quando tenho que lidar com esquemas mais complexos.",
-        "Porém entendo o poder de solucionar problemas com nodejs, bem... assim penso, mas podemos conversar sobre isso rs.",
-        "",
-        "Quando preciso construir alguma interface gráfica, um front-end, penso logo em usar reactjs ou se for algo muito simples, html + js puro. ",
-        "Tenho familiaridade com o muito util material-ui.",
-        "",
-        "Atualmente estou começando a implementar algumas coisas com apache-kafka, tenho gostado bastante."
+    'about': [
+        '',
+        '<b> ► ABOUT</b>',
+        '',
+        'JONATHAN SILVA - SOFTWARE DEVELOPER',
+        '',
+        'Um desenvolvedor que quase sempre usa ponto e virgula :)',
+        '',
+        'Elaborando APIs backend estou acostumado a usar: Spring, Kotlin, Java e Nodejs.',
+        'Dou preferência para Java e Kotlin quando tenho que lidar com esquemas mais complexos.',
+        'Porém entendo o poder de solucionar problemas com nodejs, bem... assim penso, mas podemos conversar sobre isso rs.',
+        '',
+        'Quando preciso construir alguma interface gráfica, um front-end, penso logo em usar reactjs ou se for algo muito simples, html + js puro. ',
+        'Tenho familiaridade com o muito util material-ui.',
+        '',
+        'Atualmente estou começando a implementar algumas coisas com apache-kafka, tenho gostado bastante.'
+    ],
+    'languages': [
+        '',
+        '<b> ► LANGUAGES</b>',
+        '',
+        '★★★★★ Português',
+        '★★★☆☆ Inglês',
+        '★★★☆☆ Espanhol',
+    ],
+    'skills': [
+        '',
+        '<b> ► SKILLS</b>',
+        '',
+        '★★★★☆ java / kotlin',
+        '★★★★☆ javascript',
+        '★★★★☆ spring-boot / spring-jpa',
+        '★★★☆☆ reactjs',
+        '★★★☆☆ expressjs',
+        '★★★☆☆ aws / firebase',
+        '★★★☆☆ linux',
+        '★★☆☆☆ kafka',
+    ],
+    'social':[
+        '',
+        '<b> ► SOCIAL</b>',
+        '',
+        '<a href="https://www.linkedin.com/in/jonathan-sh/"> <i class="fab fa-linkedin"></i>  linkedin </a>',
+        '<a href="https://github.com/jonathan-sh/"> <i class="fab fa-github"></i>  github </a>',
+    ],
+    'hobbies':[
+        '',
+        '<b> ► HOBBIES</b>',
+        '',
+        ' Trilhas de mtb 🚲',
+        ' Fazer pães 🍞🥖',
+    ],
+    'work':[
+        '',
+        '<b> ► WORK EXPERIENCE</b>',
+        '',
+        '<b>Software Developer at Solinftec</b>',
+        '<b>start:</b> Novembro 2016 | <b>end:</b> Presente',
+        '&nbsp&nbsp&nbsp ',
+        '&nbsp&nbsp&nbsp Comecei trabalhando como estagiário para integrar a equipe que começou o desenvolvimento do sgpa (sistema core da empresa), ',
+        '&nbsp&nbsp&nbsp fui efetivado e trabalhamos no sgpa até ele entrar em produção. ',
+        '&nbsp&nbsp&nbsp ',
+        '&nbsp&nbsp&nbsp Uma vez que o sgpa estava em produção em larga escala, ',
+        '&nbsp&nbsp&nbsp tive a oportunidade de passar para a equipe de pesquisa e desenvolvimento, ',
+        '&nbsp&nbsp&nbsp onde a nossa tarefa é lidar com projetos novos com um certo grau de dificuldade inovatória dentre estes desafios: ',
+        '&nbsp&nbsp&nbsp&nbsp ✓ processamento de algoritmos de ranqueamento em paralelo',
+        '&nbsp&nbsp&nbsp&nbsp ✓ integrações com nossa AI (alice)',
+        '&nbsp&nbsp&nbsp&nbsp ✓ notificações em tempo real com múltiplos devices',
+        '&nbsp&nbsp&nbsp&nbsp ✓ intersecção de polígonos geográfico para o disparo de eventos',
+        '&nbsp&nbsp&nbsp ',
+        '&nbsp&nbsp&nbsp Alguns projetos que trabalhei e suas tecnologias mais importantes:',
+        '&nbsp&nbsp&nbsp ',
+        '&nbsp&nbsp&nbsp <b>SGPA-API (sistema core da empresa)</b>',
+        '&nbsp&nbsp&nbsp&nbsp - java com spring boot;',
+        '&nbsp&nbsp&nbsp&nbsp - javascript;',
+        '&nbsp&nbsp&nbsp&nbsp - oracle;',
+        '&nbsp&nbsp&nbsp ',
+        '&nbsp&nbsp&nbsp <b>WHITE-RABBIT (centralizador de integração com a IA interna)</b>',
+        '&nbsp&nbsp&nbsp&nbsp - nodejs (typescript com express);',
+        '&nbsp&nbsp&nbsp&nbsp - s3;',
+        '&nbsp&nbsp&nbsp&nbsp - github actions (testes automatizados);',
+        '&nbsp&nbsp&nbsp ',
+        '&nbsp&nbsp&nbsp <b>NOTIFICATION-API (centralizador do notificações)</b>',
+        '&nbsp&nbsp&nbsp&nbsp - kotlin com spring boot;',
+        '&nbsp&nbsp&nbsp&nbsp - fire cloud mensagem;',
+        '&nbsp&nbsp&nbsp&nbsp - apache-kafka;',
+        '&nbsp&nbsp&nbsp&nbsp - github actions (testes automatizados);',
+        '&nbsp&nbsp&nbsp ',
+        '&nbsp&nbsp&nbsp <b>ALICE-GEO-TRIGGER (intersecção de polígonos geográfico para o disparo de eventos)</b>',
+        '&nbsp&nbsp&nbsp&nbsp - nodejs;',
+        '&nbsp&nbsp&nbsp&nbsp - turf;',
+        '&nbsp&nbsp&nbsp&nbsp - aws lambdas;',
+        '&nbsp&nbsp&nbsp&nbsp - github actions (deploy e github actions (testes automatizados);',
     ]
 }
 
@@ -27,9 +106,33 @@ const setFocusAtTheLastInput = () => {
     document.getElementById(inputId).focus();
 };
 
+
 const printLn = (output) => {
-    const line = `<span class="output">${output}</span>`;
+    const spanId =  `out-${++outputId}`;
+    const line = `<span id="${spanId}" class="output">${output}</span>`;
     document.getElementById("terminal").insertAdjacentHTML('beforeend', line);
+};
+
+const buildPromises = (topics) => {
+    let lines = [];
+    topics.forEach(topic => {
+        source[topic].forEach(line => {
+            lines.push(line);
+        });
+    });
+
+    let promises = [];
+    for (let index = 0; index < lines.length; index++) {
+        const promise = new Promise((resolve) => {
+            setTimeout(() => {
+                printLn(lines[index]);
+                resolve(true)
+            }, (index + 1) * 50)
+        });
+        promises.push(promise);
+    }
+
+    return promises;
 };
 
 const getPromisesByCommand = {
@@ -44,21 +147,13 @@ const getPromisesByCommand = {
 
         return promises;
     },
-    'about': () => {
-        const lines = source['about'];
-        let promises = [];
-        for (let index = 0; index < lines.length; index++) {
-            const promise = new Promise((resolve) => {
-                setTimeout(() => {
-                    printLn(lines[index]);
-                    resolve(true)
-                }, (index + 1) * 150)
-            });
-            promises.push(promise);
-        }
-
-        return promises;
-    }
+    'about': () => buildPromises(['about']) ,
+    'languages':() =>  buildPromises(['languages']),
+    'skills':() => buildPromises(['skills']),
+    'social':() => buildPromises(['social']),
+    'hobbies':() => buildPromises(['hobbies']),
+    'work':() => buildPromises(['work']),
+    'profile':() => buildPromises(['about', 'skills', 'social', 'languages']),
 };
 
 const runCommand = () => {
@@ -71,6 +166,7 @@ const runCommand = () => {
     else {
         const promises = getPromisesByCommand[command];
         if (promises) {
+            console.log(promises);
             Promise.all(promises()).then(() => newLine());
         } else {
             const output = `bash: ${command} : command not found...`;
