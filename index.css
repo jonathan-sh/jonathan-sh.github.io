@@ -27,7 +27,6 @@ a {
     background-color: chartreuse;
 }
 
-
 .btn-margin{
     margin-top: 35%;
 }
@@ -43,7 +42,7 @@ a {
 
 .mode-pdf{
     float: left;  
-    background-color: blue;
+    background-color:blue;
 }
 
 .mode-terminal{
@@ -93,3 +92,21 @@ a {
     width: 100%;
 }
 /*AND TERMINAL*/
+
+/*START CV*/
+.cv-img-1{
+    background-image: url('./cv/cv-1.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 2339px;
+    
+}
+
+.cv-img-2{
+    background-image: url('./cv/cv-2.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 2339px;
+    
+}
+/*END CV*/
