@@ -41,9 +41,11 @@
     </div>
 
     <div id="pdf_mode" class="w-50 h-100 transition mode-pdf centralize">
-        <div class="cv-img-1 removed"></div>
+        <!-- <div class="cv-img-1 removed"></div>
         <br/>
-        <div class="cv-img-2 removed"></div>
+        <div class="cv-img-2 removed"></div> -->
+
+        <embed id="cv-pdf" src="./cv/cv.pdf" class="removed" type="application/pdf" width="100%" height="100%" />
         <button id="go_pdf"  class="btn btn-light btn-margin centralize">CONVENTIONAL MODE</button>
     </div>
     <div id="terminal_mode" class="w-50 h-100 transition mode-terminal centralize" onclick="setFocusAtTheLastInput()">
@@ -84,6 +86,9 @@
         $("#pdf_mode").removeClass("w-50");
         $("#pdf_mode").addClass("w-100");
         $("#terminal_mode").removeClass("w-50");
+       
+        $("#cv-pdf").removeClass("removed");
+
         $(".cv-img-1").removeClass("removed");
         $(".cv-img-2").removeClass("removed");
         $("#terminal_mode").addClass("reducer");
