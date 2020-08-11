@@ -3,6 +3,14 @@ let outputId = 0;
 let history = [];
 let historyIndex = 0;
 
+const terminalInit = () => {
+    return `<terminal id="terminal">
+                <input-line style="display: inline-block; width: 100%;">
+                     <span class="name">headhunter@jarvis:~$&nbsp;</span>
+                <input id="${inputId}" class="input" onkeyup="pressKey(event)" autofocus>
+                </input-line>        
+            </terminal>`};
+
 
 const source = {
     'about': [
@@ -43,21 +51,21 @@ const source = {
         '★★★☆☆ linux',
         '★★☆☆☆ kafka',
     ],
-    'social':[
+    'social': [
         '',
         '<b> ► SOCIAL</b>',
         '',
         '<a href="https://www.linkedin.com/in/jonathan-sh/"> <i class="fab fa-linkedin"></i>  linkedin </a>',
         '<a href="https://github.com/jonathan-sh/"> <i class="fab fa-github"></i>  github </a>',
     ],
-    'hobbies':[
+    'hobbies': [
         '',
         '<b> ► HOBBIES</b>',
         '',
         ' Trilhas de mtb 🚲',
         ' Fazer pães 🍞🥖',
     ],
-    'work':[
+    'work': [
         '',
         '<b> ► WORK EXPERIENCE</b>',
         '',
@@ -103,14 +111,17 @@ const source = {
 
 
 const setFocusAtTheLastInput = () => {
-    document.getElementById(inputId).focus();
+    if (document.getElementById(inputId)) {
+        document.getElementById(inputId).focus();
+    }
 };
 
 
 const printLn = (output) => {
-    const spanId =  `out-${++outputId}`;
+    const spanId = `out-${++outputId}`;
     const line = `<span id="${spanId}" class="output">${output}</span>`;
     document.getElementById("terminal").insertAdjacentHTML('beforeend', line);
+    document.getElementById(spanId).scrollIntoView({ behavior: 'auto', block: 'start' });
 };
 
 const buildPromises = (topics) => {
@@ -137,37 +148,69 @@ const buildPromises = (topics) => {
 
 const getPromisesByCommand = {
     'date': () => {
-        let promises = [];
         const promise = new Promise(resolve => {
             const output = new Date().toString();
             printLn(output);
             resolve(true)
         });
-        promises.push(promise);
 
-        return promises;
+        return [promise];
     },
-    'about': () => buildPromises(['about']) ,
-    'languages':() =>  buildPromises(['languages']),
-    'skills':() => buildPromises(['skills']),
-    'social':() => buildPromises(['social']),
-    'hobbies':() => buildPromises(['hobbies']),
-    'work':() => buildPromises(['work']),
-    'profile':() => buildPromises(['about', 'skills', 'social', 'languages']),
+    'clear': () => {
+        const promise = new Promise(resolve => {
+            $("#terminal").remove();
+            $("#terminal_mode").append(terminalInit());
+            resolve(false)
+        });
+
+        return [promise];
+    },
+    'exit': () => {
+        const bye = new Promise(resolve => {
+            setTimeout(() => {
+                printLn("")
+                printLn("<b>(¯ ▽ ¯) ノ bye! </b>")
+                printLn("")
+                newLine();
+                resolve(true)
+            }, 100);
+        });
+
+        const close = new Promise(resolve => {
+            setTimeout(() => {
+                outTermianlMode();
+                resolve(true)
+            }, 1100);
+        });
+        
+
+        return [bye, close];
+    },
+    'about': () => buildPromises(['about']),
+    'languages': () => buildPromises(['languages']),
+    'skills': () => buildPromises(['skills']),
+    'social': () => buildPromises(['social']),
+    'hobbies': () => buildPromises(['hobbies']),
+    'work': () => buildPromises(['work']),
+    'profile': () => buildPromises(['about', 'skills', 'social', 'languages']),
 };
 
 const runCommand = () => {
 
     const command = document.getElementById(inputId).value.toString().toLocaleLowerCase();
-
     if (command == "") {
         newLine();
     }
     else {
         const promises = getPromisesByCommand[command];
         if (promises) {
-            console.log(promises);
-            Promise.all(promises()).then(() => newLine());
+            Promise.all(promises()).then((out) => {
+                if (out.filter(it => it == false).length == 0) {
+                    newLine();
+                }
+
+            }
+            );
         } else {
             const output = `bash: ${command} : command not found...`;
             printLn(output);
@@ -180,13 +223,15 @@ const runCommand = () => {
 }
 
 const newLine = () => {
-    document.getElementById(inputId).disabled = true;
-    const line = `<input-line style="display: inline-block; width: 100%;">
+    if (document.getElementById(inputId)) {
+        document.getElementById(inputId).disabled = true;
+        const line = `<input-line style="display: inline-block; width: 100%;">
                     <span class="name">headhunter@jarvis:~$&nbsp;</span>
                     <input id ="${++inputId}"class="input" onkeyup="pressKey(event)">
                   </input-line>`;
-    document.getElementById("terminal").insertAdjacentHTML('beforeend', line);
-    setFocusAtTheLastInput();
+        document.getElementById("terminal").insertAdjacentHTML('beforeend', line);
+        setFocusAtTheLastInput();
+    }
 };
 
 const getHistory = () => {

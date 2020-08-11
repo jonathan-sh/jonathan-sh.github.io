@@ -5,20 +5,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css" />
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" crossorigin="anonymous">
+    
+    <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/76f282a1c2.js" crossorigin="anonymous"></script>
-    <script src="index.js"></script>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <!-- custom terminal-->
+    <script src="terminal.js"></script>
+
     <title>Jonathan :)</title>
     <style>
-        a { text-decoration: none; color: inherit; }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
     </style>
 </head>
 
-<body  onclick="setFocusAtTheLastInput()">
-    <terminal id="terminal" style="overflow: auto">
-        <input-line style="display: inline-block; width: 100%;">
-            <span class="name">headhunter@jarvis:~$&nbsp;</span>
-            <input id="0" class="input" onkeyup="pressKey(event)" autofocus>
-        </input-line>        
-    </terminal>
+<body>
+    <div id="title" class="title centralize">
+        <span class="spanTitle">
+            Choose a mode   
+        </span>
+    </div>
+
+    <div id="pdf_mode" class="w-50 h-100 transition mode-pdf centralize">
+        <button id="go_pdf"  class="btn btn-light btn-margin centralize">CONVENTIONAL MODE</button>
+    </div>
+    <div id="terminal_mode" class="w-50 h-100 transition mode-terminal centralize" onclick="setFocusAtTheLastInput()">
+        <button id="go_terminal" class="btn btn-light btn-margin centralize">INTERACTIVE MODE</button>
+    </div>
 </body>
+
+<script>
+
+    const enterInTerminalMode = () => {
+        $("#terminal_mode").removeClass("centralize");
+        $("#terminal_mode").removeClass("w-50");
+        $("#terminal_mode").addClass("w-100");
+        $("#terminal_mode").addClass("mode-terminal-padding");
+        $("#pdf_mode").removeClass("w-50");
+        $("#pdf_mode").addClass("reducer");
+        $("#go_pdf").addClass("removed");
+        $("#go_terminal").addClass("removed");
+        $("#title").addClass("removed");
+        $("#terminal_mode").append(terminalInit());
+    };
+
+    const outTermianlMode = () =>{
+        $("#terminal_mode").addClass("centralize");
+        $("#terminal_mode").addClass("w-50");
+        $("#terminal_mode").removeClass("w-100");
+        $("#terminal_mode").removeClass("mode-terminal-padding");
+        $("#pdf_mode").addClass("w-50");
+        $("#pdf_mode").removeClass("reducer");
+        $("#go_pdf").removeClass("removed");
+        $("#go_terminal").removeClass("removed");
+        $("#title").removeClass("removed");
+        $("#terminal").remove();
+    };
+
+    $("#go_terminal").click (() => enterInTerminalMode());
+
+
+
+    $("#go_pdf").click (() =>{
+        $("#pdf_mode").removeClass("w-50");
+        $("#pdf_mode").addClass("w-100");
+        $("#terminal_mode").removeClass("w-50");
+        $("#terminal_mode").addClass("reducer");
+        $("#go_terminal").addClass("removed");
+    });
+
+</script>
+
 </html>

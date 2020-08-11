@@ -1,12 +1,67 @@
 html, body, #fullheight {
     min-height: 100% !important;
     height: 100%;
+    background-color: black !important;
+}
+a { 
+    text-decoration: none; 
+    color: inherit; 
 }
 
-body{
+/* START HOME */
+.centralize{
+    margin: auto; 
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.title{
+    position: absolute;
+    margin-top: 8%;
+    text-align: center;
+}
+
+.spanTitle{
+    padding: 3% 8%; 
+    background-color: chartreuse;
+}
+
+
+.btn-margin{
+    margin-top: 35%;
+}
+
+.reducer{
+    width: 0px !important;
+ }
+ 
+
+.removed{
+    display: none !important;
+}
+
+.mode-pdf{
+    float: left;  
+    background-color: blue;
+}
+
+.mode-terminal{
+    float: right; 
     background-color: black;
 }
 
+.mode-terminal-padding{
+    padding-left: 5px;
+}
+
+.transition{
+    transition: width 2s;
+}
+
+/* AND HOME*/
+
+/*START TERMINAL*/
 *:focus {
     outline: none;
 }
@@ -37,3 +92,4 @@ body{
     font-size: 1.3em;
     width: 100%;
 }
+/*AND TERMINAL*/
