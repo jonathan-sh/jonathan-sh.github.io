@@ -138,7 +138,7 @@ const buildPromises = (topics) => {
             setTimeout(() => {
                 printLn(lines[index]);
                 resolve(true)
-            }, (index + 1) * 50)
+            }, (index + 1) * 110)
         });
         promises.push(promise);
     }
