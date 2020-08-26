@@ -19,7 +19,7 @@ const source = {
         '',
         'JONATHAN SILVA - SOFTWARE DEVELOPER',
         '',
-        'A developer who almost always uses semicolons : )',
+        'A developer who almost always uses semicolons :)',
         '',
         'Here’s a list of developing back-end technologies I am familiar with: Spring, Kotlin, Java and Nodejs.',
         'I prefer Java and Kotlin when I have to deal with more complex schemes, but I understand the power to solve problems with Nodejs. Well, so I think, but we can talk about it lol.',
