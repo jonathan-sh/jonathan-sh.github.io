@@ -97,6 +97,12 @@
         $("#title").addClass("removed");
     });
 
+    const params = new URLSearchParams(window.location.search);
+
+    if(params.has('interactive')){
+        enterInTerminalMode();
+    }
+
 </script>
 
 </html>
