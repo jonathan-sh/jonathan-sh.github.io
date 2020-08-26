@@ -125,7 +125,7 @@ const source = {
     'help':[
         '<b style="color:white"> ► HELP</b>',
         '',
-        '<b style="color:#a7ff00">profile</b> to get a overview',
+        '<b style="color:#a7ff00">profile</b> to get profile overview',
         '<b style="color:#a7ff00">work</b> to get work experience',    
         '<b style="color:#a7ff00">about</b> to get about text',
         '<b style="color:#a7ff00">languages</b> to get language level',
