@@ -123,7 +123,6 @@ const source = {
         '&nbsp&nbsp&nbsp&nbsp - junit',
     ],
     'help':[
-        '',
         '<b style="color:white"> ► HELP</b>',
         '',
         '<b style="color:#a7ff00">profile</b> to get a overview',
@@ -133,7 +132,7 @@ const source = {
         '<b style="color:#a7ff00">skills</b> to get the skills ',
         '<b style="color:#a7ff00">social</b> to get links',
         '<b style="color:#a7ff00">hobbies</b> to get the hobbies',
-        '<b style="color:#a7ff00">clear</b> to clearup',
+        '<b style="color:#a7ff00">clear</b> to cleanup',
         '<b style="color:#a7ff00">exit</b> to get out',
         '',
     ]
